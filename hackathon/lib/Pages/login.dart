@@ -1,15 +1,27 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: avoid_print
 
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hackathon/Constants/colorConstants.dart';
 import 'package:hackathon/Constants/imageConstants.dart';
 import 'package:hackathon/Constants/textConstants.dart';
+import 'package:hackathon/Functions/button.dart';
 import 'package:hackathon/Functions/textfield.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hackathon/Pages/signup.dart';
 import '../Functions/loginbutton.dart';
+import 'bottomnavigationbar.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +35,7 @@ class Login extends StatelessWidget {
                   image: AssetImage(ImageConstants.img7),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
               Center(
@@ -40,20 +52,67 @@ class Login extends StatelessWidget {
                     Padding(
                         padding: const EdgeInsets.all(10),
                         child: textField(ColorConstant.textfield, Icons.person,
-                            "Your Email", false)),
+                            TextConstant.youremail, false, emailController)),
                     Padding(
                         padding: const EdgeInsets.all(10),
                         child: textField(ColorConstant.textfield, Icons.lock,
-                            "Password", true)),
-                    loginbutton(context,TextConstant.login, ColorConstant.magento),
+                            TextConstant.password, true, passwordController)),
+                    loginbutton(
+                        context,
+                        TextConstant.login,
+                        ColorConstant.magento,
+                        emailController,
+                        passwordController),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(TextConstant.line),
                     ),
-                    loginbutton(context,
-                        TextConstant.loginwthphone, ColorConstant.magento),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          signInWithGoogle();
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyNavigationBar()));
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Color(ColorConstant.whitecolor),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: SizedBox(
+                                width: 15,
+                                height: 15,
+                                child: Image(
+                                  image: AssetImage(ImageConstants.img21),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              TextConstant.loginwthgoogle,
+                              style: TextStyle(
+                                  color: Color(ColorConstant.blackcolor)),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => Signup()),
+                          ),
+                        );
+                      },
                       child: Text(
                         TextConstant.createaccount,
                         style: TextStyle(
@@ -72,4 +131,19 @@ class Login extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }

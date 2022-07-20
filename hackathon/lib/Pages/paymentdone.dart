@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hackathon/Constants/colorConstants.dart';
-import 'package:hackathon/Constants/imageConstants.dart';
 import 'package:hackathon/Constants/textConstants.dart';
 import 'package:hackathon/Pages/bottomnavigationbar.dart';
 
@@ -13,24 +10,24 @@ class PaymentSuccesful extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-            child: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               width: 100,
               height: 100,
               child: CircleAvatar(
-                child: Icon(Icons.check, size: 40),
-                backgroundColor: Colors.green,
+                backgroundColor: Color(ColorConstant.greencolor),
                 radius: 30,
+                child: const Icon(Icons.check, size: 40),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Payment Sucessfful",
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                TextConstant.paymentsuccessfull,
+                style:
+                    const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
@@ -38,7 +35,7 @@ class PaymentSuccesful extends StatelessWidget {
               child: Text(
                 textAlign: TextAlign.center,
                 TextConstant.paymentmessage,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25,
                 ),
               ),
@@ -46,9 +43,9 @@ class PaymentSuccesful extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Thanks",
+                TextConstant.thanks,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25,
                 ),
               ),
@@ -69,13 +66,14 @@ class PaymentSuccesful extends StatelessWidget {
                               builder: ((context) => MyNavigationBar())));
                     },
                     child: Text(
-                      "Continue Shopping",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      TextConstant.continueshopping,
+                      style: TextStyle(
+                          color: Color(ColorConstant.whitecolor), fontSize: 20),
                     )),
               ),
             )
           ],
-        )),
+        ),
       ),
     );
   }

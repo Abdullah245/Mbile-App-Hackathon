@@ -1,9 +1,5 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:hackathon/Constants/textConstants.dart';
-
 import '../Constants/colorConstants.dart';
 import '../Constants/imageConstants.dart';
 import '../Functions/shopnowbutton.dart';
@@ -40,7 +36,7 @@ class SwipeScreen1 extends StatelessWidget {
               Text(
                 TextConstant.no,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Color(ColorConstant.whitecolor),
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     decoration: TextDecoration.underline),
@@ -48,7 +44,7 @@ class SwipeScreen1 extends StatelessWidget {
               Text(
                 TextConstant.one,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(ColorConstant.whitecolor),
                   fontWeight: FontWeight.bold,
                   fontSize: 40,
                 ),
@@ -60,7 +56,7 @@ class SwipeScreen1 extends StatelessWidget {
           bottom: 270,
           left: 30,
           child: Text(
-            TextConstant.Featured,
+            TextConstant.featured,
             style: TextStyle(
               color: Color(ColorConstant.featured),
               fontWeight: FontWeight.bold,
@@ -72,9 +68,9 @@ class SwipeScreen1 extends StatelessWidget {
           bottom: 210,
           left: 30,
           child: Text(
-            TextConstant.Tailored,
+            TextConstant.tailored,
             style: TextStyle(
-              color: Colors.white,
+              color: Color(ColorConstant.whitecolor),
               fontWeight: FontWeight.bold,
               fontSize: 40,
             ),
@@ -86,7 +82,7 @@ class SwipeScreen1 extends StatelessWidget {
           child: Text(
             TextConstant.message1,
             style: TextStyle(
-              color: Colors.white,
+              color: Color(ColorConstant.whitecolor),
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
@@ -95,7 +91,7 @@ class SwipeScreen1 extends StatelessWidget {
         Positioned(
           bottom: 80,
           left: 30,
-          child: shopnow(TextConstant.ShopNow, context),
+          child: shopnow(TextConstant.shopnow, context),
         ),
       ],
     ));

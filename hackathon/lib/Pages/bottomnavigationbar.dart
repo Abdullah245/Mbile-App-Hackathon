@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon/Constants/colorConstants.dart';
 import 'package:hackathon/Pages/add.dart';
 import 'package:hackathon/Pages/home.dart';
 import 'package:hackathon/Pages/setting.dart';
 import 'package:hackathon/Pages/shop.dart';
 
 class MyNavigationBar extends StatefulWidget {
-  MyNavigationBar({Key? key}) : super(key: key);
+  const MyNavigationBar({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyNavigationBarState createState() => _MyNavigationBarState();
 }
 
 class _MyNavigationBarState extends State<MyNavigationBar> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Shop(),
-    Setting(),
-    Add(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Home(),
+    const Shop(),
+    const Setting(),
+    const Add(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,34 +39,31 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
             BottomNavigationBarItem(
                 label: "",
                 icon: Icon(
-                  Icons.home,
-                  color: Colors.pink,
+                  Icons.home_outlined,
                 )),
             BottomNavigationBarItem(
               label: "",
               icon: Icon(
-                Icons.shop,
-                color: Colors.pink,
+                Icons.shopping_bag_outlined,
               ),
             ),
             BottomNavigationBarItem(
               label: "",
               icon: Icon(
-                Icons.settings,
-                color: Colors.pink,
+                Icons.settings_outlined,
               ),
             ),
             BottomNavigationBarItem(
               label: "",
               icon: Icon(
                 Icons.add,
-                color: Colors.pink,
               ),
             ),
           ],
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Color(ColorConstant.magento),
           iconSize: 35,
           onTap: _onItemTapped,
           elevation: 5),

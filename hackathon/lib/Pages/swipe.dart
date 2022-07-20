@@ -5,12 +5,15 @@ import 'package:hackathon/Pages/swipescreen3.dart';
 import 'package:hackathon/Pages/swipescreen4.dart';
 
 class PageViewDemo extends StatefulWidget {
+  const PageViewDemo({Key? key}) : super(key: key);
+
   @override
+  // ignore: library_private_types_in_public_api
   _PageViewDemoState createState() => _PageViewDemoState();
 }
 
 class _PageViewDemoState extends State<PageViewDemo> {
-  PageController _controller = PageController(
+  final PageController _controller = PageController(
     initialPage: 0,
   );
 
@@ -24,7 +27,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
   Widget build(BuildContext context) {
     return PageView(
       controller: _controller,
-      children: [
+      children: const [
         SwipeScreen1(),
         SwipeScreen2(),
         SwipeScreen3(),

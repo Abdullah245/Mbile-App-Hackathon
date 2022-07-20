@@ -1,12 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:hackathon/Constants/textConstants.dart';
 import 'package:hackathon/Functions/listile.dart';
+import 'package:hackathon/Pages/measurement.dart';
 import 'package:hackathon/Pages/paymentdone.dart';
-
 import '../Constants/colorConstants.dart';
 import '../Constants/imageConstants.dart';
-import '../Functions/loginbutton.dart';
 
 class Shop extends StatelessWidget {
   const Shop({Key? key}) : super(key: key);
@@ -23,49 +22,59 @@ class Shop extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Cart",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    TextConstant.cart,
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.search, size: 30),
-                        ),
-                        SizedBox(
-                            child: Image(
-                          image: AssetImage(ImageConstants.img8),
-                        )),
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(Icons.search, size: 30),
+                      ),
+                      SizedBox(
+                          child: Image(
+                        image: AssetImage(ImageConstants.img8),
+                      )),
+                    ],
                   ),
                 )
               ]),
-              listtile(ImageConstants.img4, "Hawaian Shirt", "Sandy Williams",
-                  "\$25.99"),
-              listtile(ImageConstants.img4, "Hawaian Shirt", "Sandy Williams",
-                  "\$25.99"),
-              listtile(ImageConstants.img4, "Hawaian Shirt", "Sandy Williams",
-                  "\$25.99"),
-              listtile(ImageConstants.img4, "Hawaian Shirt", "Sandy Williams",
-                  "\$25.99"),
-              listtile(ImageConstants.img4, "Hawaian Shirt", "Sandy Williams",
-                  "\$25.99"),
-              listtile(ImageConstants.img4, "Hawaian Shirt", "Sandy Williams",
-                  "\$25.99"),
+              SizedBox(
+                height: 100,
+                child: FutureBuilder<QuerySnapshot>(
+                  future: addToCart.get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView(
+                          children: snapshot.data!.docs
+                              .map((DocumentSnapshot document) {
+                        Map<String, dynamic> abc =
+                            document.data()! as Map<String, dynamic>;
+                        return ListTile(
+                          title: Text(abc['Product']),
+                          // subtitle: Text(abc['Price']),
+                          // trailing: Text(abc['Done']),
+                        );
+                      }).toList());
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Total:",
-                      style: TextStyle(
+                  Text(TextConstant.total,
+                      style: const TextStyle(
                         fontSize: 20,
                       )),
                   Text(
-                    "\$25.99",
+                    TextConstant.price,
                     style: TextStyle(
                       color: Color(ColorConstant.magento),
                       fontSize: 25,
@@ -79,18 +88,19 @@ class Shop extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => PaymentSuccesful()),
+                            builder: ((context) => const PaymentSuccesful()),
                           ),
                         );
                       },
-                      child: Text(
-                        "Pay Now",
-                        style: TextStyle(color: Colors.white),
-                      ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                           Color(ColorConstant.magento),
                         ),
+                      ),
+                      child: Text(
+                        TextConstant.paynow,
+                        style:
+                            TextStyle(color: Color(ColorConstant.whitecolor)),
                       ),
                     ),
                   ),

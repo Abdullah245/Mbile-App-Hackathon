@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:hackathon/Constants/textConstants.dart';
 
 class Setting extends StatelessWidget {
   const Setting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Container(child: Text("Setting"))));
+    return Scaffold(
+      body: Center(
+        child: Text(TextConstant.setting),
+      ),
+    );
   }
 }

@@ -13,6 +13,11 @@ class ImageConstants {
   static String img12 = "assets/images/3.png";
   static String img13 = "assets/images/Rectangle 3.png";
   static String img14 = "assets/images/Vector (2).png";
-
-  
+  static String img15 = "assets/images/Bitmap (1).png";
+  static String img16 = "assets/images/Bitmap (2).png";
+  static String img17 = "assets/images/Bitmap (3).png";
+  static String img18 = "assets/images/Bitmap (4).png";
+  static String img19 = "assets/images/Oval 7 (1).png";
+  static String img20 = "assets/images/Oval 7 (3).png";
+  static String img21 = "assets/images/5847f9cbcef1014c0b5e48c8.png";
 }

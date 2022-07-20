@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-textField(clr, i, t, bool b) {
+textField(clr, i, t, bool b, con) {
   return TextField(
+    controller: con,
     obscureText: b,
     decoration: InputDecoration(
       border: OutlineInputBorder(

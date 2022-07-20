@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon/Pages/bottomnavigationbar.dart';
 import 'package:hackathon/Pages/home.dart';
-import 'package:hackathon/Pages/login.dart';
+import 'package:hackathon/Pages/measurement.dart';
 import 'package:hackathon/Pages/productpage.dart';
-import 'package:hackathon/Pages/splash.dart';
-import 'package:hackathon/Pages/swipescreen1.dart';
-import 'package:hackathon/Pages/swipescreen2.dart';
-import 'package:hackathon/Pages/swipescreen3.dart';
-import 'package:hackathon/Pages/swipescreen4.dart';
+import 'package:hackathon/Pages/signup.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'Pages/bottomnavigationbar.dart';
+import 'Pages/login.dart';
+import 'Pages/splash.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -19,8 +23,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Raleway'),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Splash()),
+      home: const Scaffold(
+        body: Splash(),
+      ),
     );
   }
 }
